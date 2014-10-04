@@ -23,7 +23,8 @@ def analyse():
   try:
     #image_base64 = request.POST.get('image')
 
-    print request.files.get('image')
+    img = request.files.get('image')
+    img.save('tmp')
     return {'status': 'ok'}
 
   except:
