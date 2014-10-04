@@ -21,14 +21,16 @@ $(':file').change(function(){
     }
     else {
         $(':submit').click(function(e){
-        	var formData = new FormData($('.upload')[0]);
+        	var formData = new FormData($('#upload')[0]);
+            formData.append('image', file)
+            console.log(formData);
             $.ajax({
-                url: 'http://162.243.208.97/analyse',
+                url: 'http://localhost:8080/analyse',
                 type: 'POST',
                 xhr: function() {
                     myXhr = $.ajaxSettings.xhr();
                     if(myXhr.upload){
-                        // myXhr.upload.addEventListener('progress', progressHandlingFunction, false);
+                        myXhr.upload.addEventListener('progress', function(s) {console.log(s)}, false);
                     }
                     return myXhr;
                 },
