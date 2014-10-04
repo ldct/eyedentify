@@ -15,6 +15,7 @@ def health():
 @bottle.post('/analyse')
 def analyse():
   image_base64 = request.POST.get('image')
+  return {'status': 'ok', 'overlay': image_base64[0:10]}
 
 try:
   bottle.run(host='0.0.0.0', port=80, debug=False)

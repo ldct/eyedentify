@@ -23,7 +23,7 @@ $(':file').change(function(){
         $(':submit').click(function(e){
         	var formData = new FormData($('.upload')[0]);
             $.ajax({
-                url: 'http://162.243.208.97/',  //server script to process data
+                url: 'http://162.243.208.97/analyse',
                 type: 'POST',
                 xhr: function() {
                     myXhr = $.ajaxSettings.xhr();
@@ -43,9 +43,7 @@ $(':file').change(function(){
                     else {
                         var catchFile = $(":file").val();
                     }
-                    var writeFile = $(":file");
-                    writeFile.html(writer(catchFile));
-                    $("*setIdOfImageInHiddenInput*").val(data.logo_id);
+                    console.log(data);
                 },
                 error: errorHandler = function(err) {
                     console.log('error');
