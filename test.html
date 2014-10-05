@@ -12,6 +12,7 @@ $(':submit').click(function(e){
 	var formData = new FormData($('#upload')[0]);
     formData.append('image', window.file)
     $.ajax({
+    	//url: 'http://localhost:8080/analyse',
         url: 'http://162.243.208.97/analyse',
         type: 'POST',
         xhr: function() {

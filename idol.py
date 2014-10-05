@@ -13,7 +13,8 @@ def postrequests(function,data={},files={}):
 
 #logo recognition
 def getlogo(filename):
-    results = postrequests('recognizeimages', files= {'file': open(filename, 'rb')}, indexes={'indexes': 'corporatelogos'})
+    results = postrequests('recognizeimages', files= {'file': open(filename, 'rb')})
+    print results
     return []
 
 #barcode recognition
@@ -49,3 +50,5 @@ def try_gettextscene():
             ret.append(['number', search.group()])
 
     return ret
+
+getlogo('pics/logos')
