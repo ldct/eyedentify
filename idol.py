@@ -8,7 +8,7 @@ def postrequests(function,data={},files={}):
     r=requests.post(callurl,data=data,files=files)
     return r.json()
 
-f = open('text.jpg', 'rb')
+f = open('pics/phone_number_2.jpg', 'rb')
 
 results = postrequests('ocrdocument', files= {'file': f}, data={'mode': 'scene_photo'})
 print results
