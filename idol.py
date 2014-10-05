@@ -20,7 +20,7 @@ def try_getlogo():
         info = requests.get('http://dev.markitondemand.com/Api/v2/Quote/json?symbol=' + symbol).json()
         return ['com ' + info['Name'] + ' $' + str(info['LastPrice'])]
     else:
-        return 0
+        return []
 
 def try_getbarcode():
 

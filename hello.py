@@ -36,7 +36,13 @@ def analyse():
     gevent.spawn(try_getbarcode), gevent.spawn(try_getlogo), gevent.spawn(try_mashape)]
   gevent.joinall(lst)
 
-  res = list(itertools.chain(*[g.value for g in lst]))
+  print lst
+
+  values = [g.value for g in lst]
+
+  print values
+
+  res = list(itertools.chain(*values))
 
   if (len(res)):
     ret = res[0]
