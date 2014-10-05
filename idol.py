@@ -1,5 +1,6 @@
 import requests, re
 import gevent
+import unirest
 
 url="http://api.idolondemand.com/1/api/sync/{}/v1"
 apikey="8e1741c1-1c77-4be0-b0eb-5084924de171"
@@ -55,3 +56,21 @@ def try_gettextscene():
             ret.append(['number', search.group()])
 
     return ret
+
+
+def try_mashape():
+    response = unirest.post("https://camfind.p.mashape.com/image_requests",
+      headers={"X-Mashape-Key": "E08kePg8rnmsh0bgLCzJR8mFKE7Tp1D6CKBjsnNRrG3VsISgJg"},
+      params={"image_request[image]": open('tmp.jpg', mode="r"), "image_request[locale]": "en_US"}
+    )
+    token = response.body['token']
+    print token
+
+    while True:
+        response = unirest.get("https://camfind.p.mashape.com/image_responses/" + token,
+          headers={"X-Mashape-Key": "E08kePg8rnmsh0bgLCzJR8mFKE7Tp1D6CKBjsnNRrG3VsISgJg"}
+        )
+        gevent.sleep(0.5)
+        print response.body
+        if (response.body['status'] == 'completed'):
+            return [response.body['name']]
