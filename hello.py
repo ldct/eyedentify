@@ -28,7 +28,7 @@ def analyse_options():
 @bottle.post('/analyse')
 def analyse():
   img = request.files.get('image')
-  img.save('tmp', overwrite=True)
+  img.save('tmp.jpg', overwrite=True)
 
   lst = [gevent.spawn(try_gettext), gevent.spawn(try_gettextscene)]
   gevent.joinall(lst)

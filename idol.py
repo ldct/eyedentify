@@ -24,7 +24,7 @@ def getbarcode(filename):
 
 
 def try_gettext():
-    results = postrequests('ocrdocument', files= {'file': open('tmp', 'rb')}, data={'mode': 'document_photo'})
+    results = postrequests('ocrdocument', files= {'file': open('tmp.jpg', 'rb')}, data={'mode': 'document_photo'})
 
     ret = []
 
@@ -38,7 +38,7 @@ def try_gettext():
     return ret
 
 def try_gettextscene():
-    results = postrequests('ocrdocument', files= {'file': open('tmp', 'rb')}, data={'mode': 'scene_photo'})
+    results = postrequests('ocrdocument', files= {'file': open('tmp.jpg', 'rb')}, data={'mode': 'scene_photo'})
 
     ret = []
 
