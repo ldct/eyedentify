@@ -14,7 +14,7 @@ def postrequests(function,data={},files={}):
 
 def try_getlogo():
     results = postrequests('recognizeimages', files= {'file': open('tmp.jpg', 'rb')}, data={'image_type': 'complex_3d'})
-    return [o['unique_name'] for o in results['object']]
+    return ['com ' + o['unique_name'] for o in results['object']]
 
 def try_getbarcode():
 
@@ -25,7 +25,7 @@ def try_getbarcode():
     barcode = results['barcode']
 
     if len(barcode):
-        return [bc['text'] for bc in barcode]
+        return ['url ' + bc['text'] for bc in barcode]
     else:
         return []
 
@@ -39,7 +39,7 @@ def try_gettext():
         search = re.search('[0-9]\ [0-9]{3}\ [0-9]{3}\ [0-9]{4}', text)
 
         if search:
-            ret.append(['number', search.group()])
+            ret.append(['txt ', search.group()])
 
     return ret
 
@@ -53,7 +53,7 @@ def try_gettextscene():
         search = re.search('[0-9]\ [0-9]{3}\ [0-9]{3}\ [0-9]{4}', text)
 
         if search:
-            ret.append(['number', search.group()])
+            ret.append(['txt ', search.group()])
 
     return ret
 
@@ -73,4 +73,4 @@ def try_mashape():
         gevent.sleep(0.5)
         print response.body
         if (response.body['status'] == 'completed'):
-            return [response.body['name']]
+            return ['txt ' + response.body['name']]

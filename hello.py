@@ -37,9 +37,11 @@ def analyse():
   gevent.joinall(lst)
 
   res = list(itertools.chain(*[g.value for g in lst]))
-  print(res)
 
-  return 'text ' + ' '.join(res)
+  if (len(res)):
+    return res[0]
+  else:
+    return 'nth'
 
 @bottle.route('/tmp.jpg')
 def tmp():
