@@ -1,5 +1,11 @@
+import gevent.monkey
+
+gevent.monkey.patch_all()
+
 import bottle
 from bottle import response, request, hook, route
+
+from idol import try_gettext, try_gettextscene
 
 import base64
 
@@ -20,15 +26,13 @@ def analyse_options():
 
 @bottle.post('/analyse')
 def analyse():
-  try:
-    #image_base64 = request.POST.get('image')
+  img = request.files.get('image')
+  img.save('tmp', overwrite=True)
 
-    img = request.files.get('image')
-    img.save('tmp')
-    return {'status': 'ok'}
+  lst = [gevent.spawn(try_gettext), gevent.spawn(try_gettextscene)]
+  gevent.joinall(lst)
 
-  except:
-    return {'status': 'oops'}
+  return {'status': 'ok'}
 
 try:
   bottle.run(host='0.0.0.0', port=80, debug=False)

@@ -8,8 +8,49 @@
 </form>
 <script>
 
+$(':submit').click(function(e){
+	var formData = new FormData($('#upload')[0]);
+    formData.append('image', window.file)
+    console.log(formData);
+    $.ajax({
+        url: 'http://localhost:8080/analyse',
+        type: 'POST',
+        xhr: function() {
+            myXhr = $.ajaxSettings.xhr();
+            if(myXhr.upload){
+                myXhr.upload.addEventListener('progress', function(s) {console.log(s)}, false);
+            }
+            return myXhr;
+        },
+        //Ajax events
+        success: completeHandler = function(data) {
+            /*
+            * workaround for crome browser // delete the fakepath
+            */
+            if(navigator.userAgent.indexOf('Chrome')) {
+                var catchFile = $(":file").val().replace(/C:\\fakepath\\/i, '');
+            }
+            else {
+                var catchFile = $(":file").val();
+            }
+            console.log(data);
+        },
+        error: errorHandler = function(err) {
+            console.log('error');
+            console.log(err);
+        },
+        // Form data
+        data: formData,
+        //Options to tell JQuery not to process data or worry about content-type
+        cache: false,
+        contentType: false,
+        processData: false
+    }, 'json');
+	return false;
+});
+
 $(':file').change(function(){
-    var file = this.files[0];
+    window.file = this.files[0];
     name = file.name;
     size = file.size;
     type = file.type;
@@ -20,46 +61,6 @@ $(':file').change(function(){
         alert("File doesnt match png, jpg or gif");
     }
     else {
-        $(':submit').click(function(e){
-        	var formData = new FormData($('#upload')[0]);
-            formData.append('image', file)
-            console.log(formData);
-            $.ajax({
-                url: 'http://localhost:8080/analyse',
-                type: 'POST',
-                xhr: function() {
-                    myXhr = $.ajaxSettings.xhr();
-                    if(myXhr.upload){
-                        myXhr.upload.addEventListener('progress', function(s) {console.log(s)}, false);
-                    }
-                    return myXhr;
-                },
-                //Ajax events
-                success: completeHandler = function(data) {
-                    /*
-                    * workaround for crome browser // delete the fakepath
-                    */
-                    if(navigator.userAgent.indexOf('Chrome')) {
-                        var catchFile = $(":file").val().replace(/C:\\fakepath\\/i, '');
-                    }
-                    else {
-                        var catchFile = $(":file").val();
-                    }
-                    console.log(data);
-                },
-                error: errorHandler = function(err) {
-                    console.log('error');
-                    console.log(err);
-                },
-                // Form data
-                data: formData,
-                //Options to tell JQuery not to process data or worry about content-type
-                cache: false,
-                contentType: false,
-                processData: false
-            }, 'json');
-        	return false;
-        });
     }
 });
 
