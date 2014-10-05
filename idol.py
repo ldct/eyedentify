@@ -14,7 +14,13 @@ def postrequests(function,data={},files={}):
 
 def try_getlogo():
     results = postrequests('recognizeimages', files= {'file': open('tmp.jpg', 'rb')}, data={'image_type': 'complex_3d'})
-    return ['com ' + o['unique_name'] for o in results['object']]
+    obj = results['object']
+    if len(obj):
+        symbol = obj[0]['unique_name']
+        info = requests.get('http://dev.markitondemand.com/Api/v2/Quote/json?symbol=' + symbol).json()
+        return ['com ' + info['Name'] + ' $' + str(info['LastPrice'])]
+    else:
+        return 0
 
 def try_getbarcode():
 

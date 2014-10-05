@@ -39,9 +39,12 @@ def analyse():
   res = list(itertools.chain(*[g.value for g in lst]))
 
   if (len(res)):
-    return res[0]
+    ret = res[0]
   else:
-    return 'nth'
+    ret = 'nth'
+
+  print ret
+  return ret
 
 @bottle.route('/tmp.jpg')
 def tmp():
