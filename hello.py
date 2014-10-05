@@ -38,10 +38,7 @@ def analyse():
   res = list(itertools.chain(*[g.value for g in lst]))
   print(res)
 
-  return {
-    'status': 'ok',
-    'results': res
-  }
+  return 'text ' + ' '.join(res)
 
 @bottle.route('/tmp.jpg')
 def tmp():
