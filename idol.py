@@ -75,3 +75,5 @@ def try_mashape():
         print response.body
         if (response.body['status'] == 'completed'):
             return ['txt ' + response.body['name']]
+
+    return []
