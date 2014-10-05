@@ -10,6 +10,7 @@ def postrequests(function,data={},files={}):
     r=requests.post(callurl,data=data,files=files)
     return r.json()
 
+<<<<<<< HEAD
 f = open('pics/microsoft.jpg', 'rb')
 
 def gettext(filename):
