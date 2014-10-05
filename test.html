@@ -12,7 +12,7 @@ $(':submit').click(function(e){
 	var formData = new FormData($('#upload')[0]);
     formData.append('image', window.file)
     $.ajax({
-        url: 'http://localhost:8080/analyse',
+        url: 'http://162.243.208.97/analyse',
         type: 'POST',
         xhr: function() {
             myXhr = $.ajaxSettings.xhr();
@@ -29,7 +29,7 @@ $(':submit').click(function(e){
             else {
                 var catchFile = $(":file").val();
             }
-            console.log(data.results);
+            console.log(data);
         },
         error: errorHandler = function(err) {
             console.log('error');
