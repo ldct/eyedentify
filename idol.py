@@ -8,19 +8,21 @@ def postrequests(function,data={},files={}):
     r=requests.post(callurl,data=data,files=files)
     return r.json()
 
-f = open('pics/phone_number_2.jpg', 'rb')
-
 #text from image
 def gettext():
-	results = postrequests('ocrdocument', files= {'file': open('text.jpg', 'rb')}, data={'mode': 'scene_photo'})
+	results = postrequests('ocrdocument', files = {'file': open('text.jpg', 'rb')}, data={'mode': 'scene_photo'})
 	return results
-
+	
 #logo recognition
 def getlogo():
-	results = postrequests('recognizeimages', files= {'file': open('tmp.jpg', 'rb')}, indexes={'indexes': 'corporatelogos'})
+	results = postrequests('recognizeimages', files = {'file': open('tmp.jpg', 'rb')})
 	return results
-
+	
 #barcode recognition
 def getbarcode():
-	results = postrequests('recognizebarcodes', files= {'file': open('tmp.jpg', 'rb')})
+	results = postrequests('recognizebarcodes', files = {'file': open('tmp.jpg', 'rb')})
 	return results
+
+#entity extraction
+results = postrequests('extractentities', text = {'text': gettext()})
+print results
