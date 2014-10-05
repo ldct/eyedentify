@@ -51,4 +51,4 @@ def try_gettextscene():
 
     return ret
 
-getlogo('pics/logos')
+#getlogo('pics/logos')
