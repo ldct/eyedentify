@@ -10,5 +10,17 @@ def postrequests(function,data={},files={}):
 
 f = open('pics/phone_number_2.jpg', 'rb')
 
-results = postrequests('ocrdocument', files= {'file': f}, data={'mode': 'scene_photo'})
-print results
+#text from image
+def gettext():
+	results = postrequests('ocrdocument', files= {'file': open('text.jpg', 'rb')}, data={'mode': 'scene_photo'})
+	return results
+
+#logo recognition
+def getlogo():
+	results = postrequests('recognizeimages', files= {'file': open('tmp.jpg', 'rb')}, indexes={'indexes': 'corporatelogos'})
+	return results
+
+#barcode recognition
+def getbarcode():
+	results = postrequests('recognizebarcodes', files= {'file': open('tmp.jpg', 'rb')})
+	return results
