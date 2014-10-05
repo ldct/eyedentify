@@ -6,7 +6,7 @@ import itertools
 import bottle
 from bottle import response, request, hook, route
 
-from idol import try_gettext, try_gettextscene
+from idol import try_gettext, try_gettextscene, try_getbarcode
 
 import base64
 
@@ -30,7 +30,7 @@ def analyse():
   img = request.files.get('image')
   img.save('tmp.jpg', overwrite=True)
 
-  lst = [gevent.spawn(try_gettext), gevent.spawn(try_gettextscene)]
+  lst = [gevent.spawn(try_gettext), gevent.spawn(try_gettextscene), gevent.spawn(try_getbarcode)]
   gevent.joinall(lst)
 
   res = list(itertools.chain(*[g.value for g in lst]))

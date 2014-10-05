@@ -13,15 +13,22 @@ def postrequests(function,data={},files={}):
 
 #logo recognition
 def getlogo(filename):
-    results = postrequests('recognizeimages', files= {'file': open(filename, 'rb')})
+    results = postrequests('recognizeimages', files= {'file': open(filename, 'rb')}, data={'image_type': 'complex_3d'})
     print results
     return []
 
-#barcode recognition
-def getbarcode(filename):
-    results = postrequests('recognizebarcodes', files= {'file': open(filename, 'rb')}, data={'barcode_type': 'qr'})
-    return []
+def try_getbarcode():
 
+    from subprocess import call
+    call(['convert', '-brightness-contrast', 'x100', '-resize', '30%', 'tmp.jpg', 'tmp_light.jpg'])
+
+    results = postrequests('recognizebarcodes', files= {'file': open('tmp_light.jpg', 'rb')}, data={'barcode_type': 'qr'})
+    barcode = results['barcode']
+
+    if len(barcode):
+        return [bc['text'] for bc in barcode]
+    else:
+        return []
 
 def try_gettext():
     results = postrequests('ocrdocument', files= {'file': open('tmp.jpg', 'rb')}, data={'mode': 'document_photo'})
@@ -50,5 +57,3 @@ def try_gettextscene():
             ret.append(['number', search.group()])
 
     return ret
-
-#getlogo('pics/logos')
