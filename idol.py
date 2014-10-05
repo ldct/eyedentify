@@ -38,31 +38,26 @@ def try_getbarcode():
 def try_gettext():
     results = postrequests('ocrdocument', files= {'file': open('tmp.jpg', 'rb')}, data={'mode': 'document_photo'})
 
-    ret = []
-
     for block in results['text_block']:
         text = block['text']
         search = re.search('[0-9]\ [0-9]{3}\ [0-9]{3}\ [0-9]{4}', text)
 
         if search:
-            ret.append(['txt ' + search.group()])
+            return ['txt ' + search.group()]
 
-    return ret
+    return []
 
 def try_gettextscene():
     results = postrequests('ocrdocument', files= {'file': open('tmp.jpg', 'rb')}, data={'mode': 'scene_photo'})
 
-    ret = []
-
     for block in results['text_block']:
         text = block['text']
         search = re.search('[0-9]\ [0-9]{3}\ [0-9]{3}\ [0-9]{4}', text)
 
         if search:
-            ret.append(['txt ' + search.group()])
+            return ['txt ' + search.group()]
 
-    return ret
-
+    return []
 
 def try_mashape():
     response = unirest.post("https://camfind.p.mashape.com/image_requests",
