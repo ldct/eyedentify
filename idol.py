@@ -45,7 +45,7 @@ def try_gettext():
         search = re.search('[0-9]\ [0-9]{3}\ [0-9]{3}\ [0-9]{4}', text)
 
         if search:
-            ret.append(['txt ', search.group()])
+            ret.append(['txt ' + search.group()])
 
     return ret
 
@@ -59,7 +59,7 @@ def try_gettextscene():
         search = re.search('[0-9]\ [0-9]{3}\ [0-9]{3}\ [0-9]{4}', text)
 
         if search:
-            ret.append(['txt ', search.group()])
+            ret.append(['txt ' + search.group()])
 
     return ret
 
