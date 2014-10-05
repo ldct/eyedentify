@@ -57,6 +57,6 @@ def tmp():
   return bottle.static_file('tmp.jpg', '/root/overlay-backend/')
 
 try:
-  bottle.run(host='0.0.0.0', port=80, debug=False)
+  bottle.run(host='0.0.0.0', port=80, debug=False, server='gevent')
 except:
-  bottle.run(host='localhost', port=8080, debug=True)
+  bottle.run(host='localhost', port=8080, debug=True, server='gevent')
