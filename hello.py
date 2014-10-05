@@ -41,6 +41,10 @@ def analyse():
     'results': res
   }
 
+@bottle.route('/tmp.jpg')
+def tmp():
+  return bottle.static_file('tmp.jpg', '/root/overlay-backend/')
+
 try:
   bottle.run(host='0.0.0.0', port=80, debug=False)
 except:
