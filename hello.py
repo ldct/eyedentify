@@ -2,6 +2,7 @@ import gevent.monkey
 
 gevent.monkey.patch_all()
 
+import itertools
 import bottle
 from bottle import response, request, hook, route
 
@@ -32,7 +33,13 @@ def analyse():
   lst = [gevent.spawn(try_gettext), gevent.spawn(try_gettextscene)]
   gevent.joinall(lst)
 
-  return {'status': 'ok'}
+  res = list(itertools.chain(*[g.value for g in lst]))
+  print(res)
+
+  return {
+    'status': 'ok',
+    'results': res
+  }
 
 try:
   bottle.run(host='0.0.0.0', port=80, debug=False)

@@ -10,38 +10,6 @@ def postrequests(function,data={},files={}):
     r=requests.post(callurl,data=data,files=files)
     return r.json()
 
-<<<<<<< HEAD
-f = open('pics/microsoft.jpg', 'rb')
-
-def gettext(filename):
-    #todo: sharpen
-    results = postrequests('ocrdocument', files= {'file': open(filename, 'rb')}, data={'mode': 'document_photo'})
-
-    ret = []
-
-    for block in results['text_block']:
-        text = block['text']
-        search = re.search('[0-9]\ [0-9]{3}\ [0-9]{3}\ [0-9]{4}', text)
-
-        if search:
-            ret.append(search.group())
-
-    return ret
-
-#text from image
-def gettextscene(filename):
-    results = postrequests('ocrdocument', files= {'file': open(filename, 'rb')}, data={'mode': 'scene_photo'})
-
-    ret = []
-
-    for block in results['text_block']:
-        text = block['text']
-        search = re.search('[0-9]\ [0-9]{3}\ [0-9]{3}\ [0-9]{4}', text)
-
-        if search:
-            ret.append(search.group())
-
-    return ret
 
 #logo recognition
 def getlogo(filename):
@@ -53,9 +21,31 @@ def getbarcode(filename):
     results = postrequests('recognizebarcodes', files= {'file': open(filename, 'rb')}, data={'barcode_type': 'qr'})
     return []
 
+
 def try_gettext():
-    res = gettext('tmp')
-    print res
+    results = postrequests('ocrdocument', files= {'file': open('tmp', 'rb')}, data={'mode': 'document_photo'})
+
+    ret = []
+
+    for block in results['text_block']:
+        text = block['text']
+        search = re.search('[0-9]\ [0-9]{3}\ [0-9]{3}\ [0-9]{4}', text)
+
+        if search:
+            ret.append(['number', search.group()])
+
+    return ret
+
 def try_gettextscene():
-    res = gettextscene('tmp')
-    print res
+    results = postrequests('ocrdocument', files= {'file': open('tmp', 'rb')}, data={'mode': 'scene_photo'})
+
+    ret = []
+
+    for block in results['text_block']:
+        text = block['text']
+        search = re.search('[0-9]\ [0-9]{3}\ [0-9]{3}\ [0-9]{4}', text)
+
+        if search:
+            ret.append(['number', search.group()])
+
+    return ret

@@ -11,15 +11,11 @@
 $(':submit').click(function(e){
 	var formData = new FormData($('#upload')[0]);
     formData.append('image', window.file)
-    console.log(formData);
     $.ajax({
         url: 'http://localhost:8080/analyse',
         type: 'POST',
         xhr: function() {
             myXhr = $.ajaxSettings.xhr();
-            if(myXhr.upload){
-                myXhr.upload.addEventListener('progress', function(s) {console.log(s)}, false);
-            }
             return myXhr;
         },
         //Ajax events
@@ -33,7 +29,7 @@ $(':submit').click(function(e){
             else {
                 var catchFile = $(":file").val();
             }
-            console.log(data);
+            console.log(data.results);
         },
         error: errorHandler = function(err) {
             console.log('error');
