@@ -11,11 +11,9 @@ def postrequests(function,data={},files={}):
     return r.json()
 
 
-#logo recognition
-def getlogo(filename):
-    results = postrequests('recognizeimages', files= {'file': open(filename, 'rb')}, data={'image_type': 'complex_3d'})
-    print results
-    return []
+def try_getlogo():
+    results = postrequests('recognizeimages', files= {'file': open('tmp.jpg', 'rb')}, data={'image_type': 'complex_3d'})
+    return [o['unique_name'] for o in results['object']]
 
 def try_getbarcode():
 
