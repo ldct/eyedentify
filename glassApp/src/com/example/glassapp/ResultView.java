@@ -1,6 +1,10 @@
 package com.example.glassapp;
 
-
+//********************************************************************************************
+//Example app From EE368 Digital Image Processing
+//Developed using Android Tutorial #3:  Server-Client Communication example app
+//Hacked/Developed by: Andrew Mendez
+//********************************************************************************************/
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

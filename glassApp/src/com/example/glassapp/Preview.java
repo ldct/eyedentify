@@ -1,9 +1,9 @@
 package com.example.glassapp;
 
 //********************************************************************************************
-//EE368 Digital Image Processing
-//Android Tutorial #3:  Server-Client Communication
-//Author: Derek Pang (dcypang@stanford.edu), David Chen (dmchen@stanford.edu)
+//Example app From EE368 Digital Image Processing
+//Developed using Android Tutorial #3:  Server-Client Communication example app
+//Hacked/Developed by: Andrew Mendez
 //********************************************************************************************/
 import java.io.IOException;
 import android.content.Context;

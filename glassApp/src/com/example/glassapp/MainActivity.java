@@ -1,30 +1,11 @@
-	/**
-	 * OpenGlass Voice Example 
-	 * Github - https://github.com/jaredsburrows/OpenQuartz
-	 * @author Jared Burrows
-	 * 
-	 * Copyright (C) 2013 OpenQuartz
-	 *
-	 * Licensed under the Apache License, Version 2.0 (the "License");
-	 * you may not use this file except in compliance with the License.
-	 * You may obtain a copy of the License at
-	 *
-	 *      http://www.apache.org/licenses/LICENSE-2.0
-	 *
-	 * Unless required by applicable law or agreed to in writing, software
-	 * distributed under the License is distributed on an "AS IS" BASIS,
-	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	 * See the License for the specific language governing permissions and
-	 * limitations under the License.
-	 */
+	/*
+	*Eye-dentify native app for google glass to take picture and send that app over Http to webserver
+	*
+	 *Hacked the Server-Client Communication example app from EE368 Digital Image Processing course at Stanford */
+
+	/* Native android app developed by Andrew Mendez, 10/4/15*/
 	
 	package com.example.glassapp;
-	
-	//********************************************************************************************
-	//EE368 Digital Image Processing
-	//Android Tutorial #3: Server-Client Communication
-	//Author: Derek Pang (dcypang@stanford.edu), David Chen (dmchen@stanford.edu)
-	//********************************************************************************************/
 	
 	import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
