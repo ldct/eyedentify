@@ -1,9 +1,10 @@
 import requests, re
 import gevent
 import unirest
+import secrets
 
-url="http://api.idolondemand.com/1/api/sync/{}/v1"
-apikey="8e1741c1-1c77-4be0-b0eb-5084924de171"
+url = "http://api.idolondemand.com/1/api/sync/{}/v1"
+apikey = secrets.IDOL_API_KEY
 
 def postrequests(function,data={},files={}):
     data["apikey"]=apikey
@@ -61,7 +62,7 @@ def try_gettextscene():
 
 def try_mashape():
     response = unirest.post("https://camfind.p.mashape.com/image_requests",
-      headers={"X-Mashape-Key": "E08kePg8rnmsh0bgLCzJR8mFKE7Tp1D6CKBjsnNRrG3VsISgJg"},
+      headers={"X-Mashape-Key": secrets.MASHAPE_SECRET},
       params={"image_request[image]": open('tmp.jpg', mode="r"), "image_request[locale]": "en_US"}
     )
     token = response.body['token']
@@ -69,7 +70,7 @@ def try_mashape():
 
     while True:
         response = unirest.get("https://camfind.p.mashape.com/image_responses/" + token,
-          headers={"X-Mashape-Key": "E08kePg8rnmsh0bgLCzJR8mFKE7Tp1D6CKBjsnNRrG3VsISgJg"}
+          headers={"X-Mashape-Key": "secrets.MASHAPE_SECRET"}
         )
         gevent.sleep(0.5)
         print response.body
